@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@color/splashscreen_bg"/>
+
+    <item
+        android:width="150dp"
+        android:height="150dp"
+        android:drawable="@mipmap/qrcodesplash"
+        android:gravity="center"
+
+        />
+    <item
+            android:width="110dp"
+            android:height="17dp"
+            android:drawable="@mipmap/textqr"
+            android:gravity="center"
+            android:top="190dp"
+    />
+<!--    <item android:bottom="150dp"-->
+<!--    >-->
+<!--        <bitmap-->
+
+<!--                        android:gravity="center"-->
+<!--                        android:src="@mipmap/qrcodesplash"/>-->
+
+
+<!--            </item>-->
+<!--            <item>-->
+<!--                <bitmap-->
+<!--                        -->
+<!--                        android:gravity="center"-->
+<!--                        android:src="@mipmap/textqr"/>-->
+<!--            </item>-->
+
+
+        </layer-list>
