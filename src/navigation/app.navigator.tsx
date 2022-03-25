@@ -4,6 +4,7 @@ import {NavigationContainer, NavigationProp} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from "../components/Home";
 import Scan from "../components/Scan";
+import ActionBarImage from "../components/ActionBarImage";
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => (
@@ -16,7 +17,7 @@ const AppNavigator = () => (
                     headerShown: false,
                 }}
             />
-            <Stack.Screen name="ScanScreen" component={Scan} />
+            <Stack.Screen name="ScanScreen" component={Scan} options={{headerRight: () => <ActionBarImage/> }} />
         </Stack.Navigator>
     </NavigationContainer>
     );

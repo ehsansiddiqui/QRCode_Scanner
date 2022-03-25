@@ -9,7 +9,7 @@ interface ScanScreenProps {
 const Scan: React.FunctionComponent<ScanScreenProps> = (props) => {
     const [loading, setLoading] = useState(true);
     const [scanData, setScanData] = useState<IQRCodePayload>();
-    const [permission, setPermission] = useState(true);
+    const [permission, setPermission] = useState(false);
 
     useEffect(() => {
         requestCameraPermission();
