@@ -1,8 +1,5 @@
 import React from 'react';
 import {View, StyleSheet, Image, Text, Button, Pressable} from 'react-native';
-import icon from '../assets/code.png';
-import {NavigationContainer, NavigationProp} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 interface HomeScreenProps {
     navigation: any;
@@ -13,7 +10,7 @@ const Home = (props : HomeScreenProps) => {
     return (
         <View style={styles.center} >
             <View>
-            <Image source={icon} />
+            <Image source={require('../assets/code.png')} />
             </View>
             <View>
             <Button  title={"Scan QR Code"} onPress={scanScreen} />
