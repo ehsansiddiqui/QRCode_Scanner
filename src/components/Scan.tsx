@@ -2,22 +2,28 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { BarCodeScanner, BarCodeScannedCallback } from 'expo-barcode-scanner';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ScanScreen() {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('');
 
-  useEffect(() => {
+  const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
-    })();
+    })()
+  }
+
+  useEffect(() => {
+    askForCameraPermission();
   }, []);
 
   const handleBarCodeScanned: BarCodeScannedCallback = ({ type, data }) => {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    storeData(type,data);
     setText("QR Code Data is: \n" + data)
   };
 
@@ -25,7 +31,20 @@ export default function ScanScreen() {
     return <Text>Requesting for camera permission</Text>;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return (
+        <View style={styles.container}>
+          <Text style={{ margin: 10 }}>No access to camera</Text>
+          <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
+        </View>)
+  }
+
+  const storeData = async (type:any,value:any) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.multiSet([['qr_code',jsonValue]])
+    } catch (e) {
+      alert("Error is :"+ e)
+    }
   }
 
   return (
