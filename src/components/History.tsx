@@ -1,3 +1,8 @@
+
+import {connect} from 'react-redux';
+import {GET_ALL_QRCODE_INFO_REQUEST} from "../redux/action";
+import Home from "./Home";
+
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Image, Text, Button, Pressable} from 'react-native';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
@@ -14,27 +19,29 @@ export default function History(props : HistoryScreenProps) {
 
     useEffect(() => {
         (async () => {
-        try {
-            const value = await AsyncStorage.getItem('qr_code');
-            const timeValue = await AsyncStorage.getItem('time');
-            if (value === null){
-                alert("Please Scan a QR Code!!!")
-            }
-            // @ts-ignore
-            setText(value)
-            // @ts-ignore
-            setTimeText(timeValue)
-            if(value !== null) {
-                // value previously stored
+            try {
+                const value = await AsyncStorage.getItem('qr_code');
+                const timeValue = await AsyncStorage.getItem('time');
+                if (value === null){
+                    alert("Please Scan a QR Code!!!")
+                }
+                // @ts-ignore
+                setText(value)
+                // @ts-ignore
+                setTimeText(timeValue)
+                if(value !== null) {
+                    // value previously stored
 
-                // alert("The value previously is:"+ value)
+                    // alert("The value previously is:"+ value)
+                }
+            } catch(e) {
+                // error reading value
+                alert("The error is:"+ e)
             }
-        } catch(e) {
-            // error reading value
-            alert("The error is:"+ e)
-        }
         })();
     }, []);
+
+
 
     return (
 
@@ -74,3 +81,58 @@ const styles = StyleSheet.create({
         color: '#263238',
     }
 });
+
+// const mapStateToProps = (state, props) => {
+//     const {type, data, time} = state.redux;
+//
+//     return {type, data, time};
+// };
+//
+// const mapDispatchToProps = (dispatch, props) => ({
+//     getAllUserInfo: () => {
+//         dispatch({
+//             type: GET_ALL_QRCODE_INFO_REQUEST,
+//             payload: {},
+//         });
+//     },
+// });
+
+//
+// const mapStateToProps = (state, props) => {
+//     const {type, data, time} = state.redux;
+//
+//     return {type, data, time};
+// };
+//
+// const mapDispatchToProps = (dispatch, props) => ({
+//     getAllUserInfo: () => {
+//         dispatch({
+//             type: GET_ALL_QRCODE_INFO_REQUEST,
+//             payload: {},
+//         });
+//     },
+// });
+//
+//
+// const HistoryView = ({type,data,time, getAllUserInfo, navigation}) => {
+//     // navigation.navigate('Login')
+//
+//     useEffect(() => {
+//         getAllUserInfo();
+//     }, [getAllUserInfo]);
+//
+//     return (
+//         <View>
+//             <Text>{type}</Text>
+//             <Text>{data}</Text>
+//             <Text>{time}</Text>
+//         </View>
+//     );
+// };
+//
+// const History = connect(
+//     mapStateToProps,
+//     mapDispatchToProps,
+// )(HistoryView);
+//
+// export default History;
